@@ -3,32 +3,28 @@ git:
   path: github.com/ChuckSchnorres/testapp
 script:
   - echo "build commands"
-  - .shipped/build
-  - .shipped/test
+  - echo "no build command"
+  - echo "no test command"
 clone:
   path: github.com/ChuckSchnorres/testapp
 build:
   image: python:3.5
   commands:
     - echo "build commands"
-    - .shipped/build
-    - .shipped/test
+    - echo "no build command"
+    - echo "no test command"
 publish:
   docker:
-    dockerfile: ./Dockerfile
-    docker_host: 10.10.10.15:2375
-    docker_version: 1.4.1
-    registry_login_url: $$bintray_repo_login_url
-    registry_login: true
+    file: ./Dockerfile
     username: $$bintray_user
     password: $$bintray_api_key
-    email: $$bintray_user_email
-    image_name: $$bintray_image_name
-    push_latest: true
-    tag: $$COMMIT
-
     registry: $$bintray_registry
     repo: $$bintray_repo
+    email: $$bintray_user_email
+    tag: $$COMMIT
+    
+
+
 notify:
   webhook:
     image: shippedrepos-docker-drone.bintray.io/drone-webhook
